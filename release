@@ -1,0 +1,7 @@
+#!/bin/bash
+git checkout develop
+git push github develop
+git checkout master
+git pull . develop
+git push github master
+git checkout develop
