@@ -50,7 +50,7 @@ class Gablocked {
         removeOnFail: false,
       },
     });
-    this.jobQueue.process(this.onResolveUser.bind(this));
+    this.jobQueue.process(2, this.onResolveUser.bind(this));
   }
 
   async createRouter (/* app */) {
@@ -163,6 +163,7 @@ class Gablocked {
 
     app.use(favicon(path.join(__dirname, 'client', 'img', 'favicon.png')));
     app.use('/uikit', express.static(path.join(__dirname, 'node_modules', 'uikit', 'dist')));
+    app.use('/', express.static(path.join(__dirname, 'client')));
 
     app.use(express.json({ }));
     app.use(express.urlencoded({ extended: true }));    
@@ -172,8 +173,9 @@ class Gablocked {
     const gablocked = new Gablocked();
     app.use('/', await gablocked.createRouter(app));
 
-    app.listen(parseInt(process.env.HTTP_BIND_PORT || '3000', 10), ( ) => {
-      console.log('http://127.0.0.1:3000/ to browse the collection of people who block you on Gab.com');
+    const HTTP_BIND_PORT = parseInt(process.env.HTTP_BIND_PORT || '3000', 10);
+    app.listen(HTTP_BIND_PORT, ( ) => {
+      console.log(`http://127.0.0.1:${HTTP_BIND_PORT}/ to browse the collection of people who block you on Gab.com`);
     });
   } catch (error) {
     console.log('failed to start gablocked', error);

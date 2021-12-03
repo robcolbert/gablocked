@@ -4,6 +4,10 @@ mixin renderGabUser (profile)
       .uk-card-media-top
         .header-crop
           img(src= profile.header_static || profile.header)
+    else
+      .uk-card-media-top
+        .header-crop
+          img(src= "/img/missing-header.png")
     .uk-card-header
       div(uk-grid).uk-grid-collapse
         .uk-width-auto
@@ -14,9 +18,48 @@ mixin renderGabUser (profile)
             .uk-text-bold= profile.display_name
           .uk-text-small
             a(href=`https://gab.com/${profile.username}`) @#{profile.username}
+
       div(uk-grid).uk-grid-small.uk-text-small.uk-flex-between
         .uk-width-auto(title= `Statuses: ${numeral(profile.statuses_count).format('0,0')}`) statuses: #{printNumber(profile.statuses_count)}
         .uk-width-auto(title= `Followers: ${numeral(profile.followers_count).format('0,0')}`) followers: #{printNumber(profile.followers_count)}
         .uk-width-auto(title= `Following: ${numeral(profile.following_count).format('0,0')}`) following: #{printNumber(profile.following_count)}
+
     .uk-card-body
-      .uk-text-break.uk-height-small.uk-overflow-auto!= profile.note
+      -
+        var note = profile.note ? profile.note.trim().replace(/\<p\>\<\/p\>/, '') : '';
+      .uk-text-break.uk-height-small.uk-overflow-auto.uk-text-small!= (note && (note.length > 0)) ? note : '<i>no profile bio</i>'
+    
+    .uk-card-footer.uk-card-secondary
+      div(uk-grid)
+        .uk-width-expand
+          .uk-text-small(title="Member since") #{moment(profile.created_at).format('MMMM YYYY')}
+        .uk-width-auto
+          div(uk-grid).uk-grid-small
+            if profile.is_pro
+              .uk-width-auto
+                .profile-badge
+                  span(uk-icon='icon: happy', title="Pro")
+            if profile.is_verified
+              .uk-width-auto
+                .profile-badge
+                  span(uk-icon='icon: check', title="Verified")
+            if profile.locked
+              .uk-width-auto
+                .profile-badge
+                  span(uk-icon='icon: lock', title="Private")
+            if profile.is_donor
+              .uk-width-auto
+                .profile-badge
+                  span(uk-icon='icon: heart', title="Donor")
+            if profile.is_investor
+              .uk-width-auto
+                .profile-badge
+                  span(uk-icon='icon: lifesaver', title="Investor")
+            if profile.is_spam
+              .uk-width-auto
+                .profile-badge
+                  span(uk-icon='icon: trash', title="Spam")
+
+
+    //- .uk-card-body
+    //-   pre= JSON.stringify(profile, null, 2)
