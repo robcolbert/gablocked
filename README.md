@@ -40,6 +40,8 @@ yarn start
 
 Simply press `Ctrl+C` to exit the web server. The resolved data remains in your local database. You can upload a fresh JSON document at any time. The system will resolve all User IDs and update your local database. Even if your block list hasn't changed, you may need to re-resolve the profiles.
 
+A job queue is used to manage the process of resolving the list of User IDs that have blocked you. While it is running, you will be shown the Job Status page. Use the Refresh button to see the current progress. Return to Home when all users have been resolved (waiting is zero).
+
 ## Dependencies
 
 - [MongoDB](https://mongodb.com) is used for local storage of Gab user profile data.

@@ -81,6 +81,7 @@ class Gablocked {
     try {
       console.log('processing input JSON file', { file: req.file });
       const blockList = await loadJsonFile(req.file.path);
+      await fs.promises.rm(req.file.path);
       for await (const blockedBy of blockList) {
         await this.jobQueue.add({ userId: blockedBy.id });
       }
