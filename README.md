@@ -54,8 +54,8 @@ A job queue is used to manage the process of resolving the list of User IDs that
 - [Multer](https://www.npmjs.com/package/multer) is used for processing HTTP POST request bodies
 - [Pug](https://pugjs.org/) is used as the HTML templating language for the views
 - [UIkit](https://getuikit.com) is used to make the web app presentable.
-- [Moment.js]() is used for processing and formatting dates for display.
-- [Numeral.js]() is used for processing and formatting numbers for display.
+- [Moment.js](http://momentjs.com/) is used for processing and formatting dates for display.
+- [Numeral.js](http://numeraljs.com/) is used for processing and formatting numbers for display.
 
 ## Hacking On It
 
