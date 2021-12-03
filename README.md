@@ -32,7 +32,9 @@ First, let Yarn resolve the application dependencies. You only need to run this 
 yarn
 ```
 
-To start the local web server:
+Next, copy `.env.default` to `.env` and change as needed.
+
+Then, to start the local web server:
 
 ```sh
 yarn start
