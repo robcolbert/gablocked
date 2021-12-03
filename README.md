@@ -49,10 +49,13 @@ A job queue is used to manage the process of resolving the list of User IDs that
 - [MongoDB](https://mongodb.com) is used for local storage of Gab user profile data.
 - [Node.js](https://nodejs.org/en/docs/) is the application runtime.
 - [node-fetch](https://www.npmjs.com/package/node-fetch) is used for interacting with the Gab API to resolve user IDs.
+- [Bull](https://www.npmjs.com/package/bull) is used to manage the job queue.
 - [ExpressJS](http://expressjs.com/) is used to provide the basic HTML interface for the application.
 - [Multer](https://www.npmjs.com/package/multer) is used for processing HTTP POST request bodies
 - [Pug](https://pugjs.org/) is used as the HTML templating language for the views
 - [UIkit](https://getuikit.com) is used to make the web app presentable.
+- [Moment.js]() is used for processing and formatting dates for display.
+- [Numeral.js]() is used for processing and formatting numbers for display.
 
 ## Hacking On It
 
