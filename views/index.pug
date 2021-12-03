@@ -1,0 +1,15 @@
+extends layouts/main
+block content
+
+  section.uk-section.uk-section-default
+    .uk-container
+      h1 The People Who Block You
+
+      form(method="POST", action="/").uk-form
+        .uk-margin
+          label(for="blockfile").uk-form-label JSON Block List
+          .uk-form-custom.uk-display-block
+            input(id="blockfile", name="blockfile", type="file")
+            button(type="button").uk-button.uk-button-default Select JSON File
+
+        button(type="submit").uk-button.uk-button-primary Upload Block List
