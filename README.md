@@ -72,5 +72,5 @@ This will start `gablocked.mjs` under Nodemon for iterative development. This ma
 
 ## Known Issues
 
-- If a person who has blocked you changes their header or profile picture, your local data will still point at their old image(s) and they will fail to load.
+- If a person who has blocked you changes their header or profile picture, your local data will still point at their old image(s) and they will fail to load. Export a fresh blockedby response and re-run the import. It will refresh every user and pull their latest profile metadata into Mongo.
 - The tool does not integrate Gab posts or timelines (and won't)
