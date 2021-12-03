@@ -8,14 +8,48 @@ html(lang='en')
     title Who Blocks Me On Gab?
 
     link(rel='stylesheet', href=`/uikit/css/uikit.min.css?v=${pkg.version}`)
+    style(type="text/css").
+      .header-crop {
+        position: relative;
+        overflow: hidden;
+        height: 140px;
+        width: 100%;
+      }
+      .header-crop img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);      
+      }
+      img.profile-picture {
+        width: 64px;
+        height: auto;
+        border-radius: 50%;
+      }
+
+      img.profile-picture.gab-pro {
+        border: solid 2px #a8a810;
+      }
+
+    -
+      function printNumber (value) {
+        return numeral(value).format(value > 1000 ? '0,0.0a' : '0,0');
+      }
 
     script(src=`/uikit/js/uikit.min.js?v=${pkg.version}`)
     script(src=`/uikit/js/uikit-icons.min.js?v=${pkg.version}`)
 
   body
 
-    block content
-
     section.uk-section.uk-section-secondary.uk-section-xsmall
       .uk-container
-        div This tool is provided for personal use on personal devices. It is not meant to be publicly hosted, and is not hardened in any way for public access.
+        .uk-text-muted.uk-text-small
+          div(uk-grid).uk-flex-between.uk-flex-middle
+            .uk-width-auto
+              a(href="/").uk-button.uk-button-default Home
+            .uk-width-auto
+              div #{pkg.name} is provided for personal use on personal devices.
+
+    block content

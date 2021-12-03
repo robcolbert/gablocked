@@ -1,15 +1,48 @@
 extends layouts/main
 block content
 
-  section.uk-section.uk-section-default
+  include components/gab-user
+
+  section(hidden= (!Array.isArray(profiles) || (profiles.length > 0))).uk-section.uk-section-default
     .uk-container
-      h1 The People Who Block You
+      .uk-margin
+        h1 The People Who Block You
+        p First, visit #[a(href="https://gab.com/api/v1/blockedby") https://gab.com/api/v1/blockedby] and save the JSON response to a file. You can right-click or long-tap that link and select "Save link as..." to save the file on your device.
 
-      form(method="POST", action="/").uk-form
+      form(method="POST", action="/", enctype="multipart/form-data").uk-form
         .uk-margin
-          label(for="blockfile").uk-form-label JSON Block List
-          .uk-form-custom.uk-display-block
-            input(id="blockfile", name="blockfile", type="file")
-            button(type="button").uk-button.uk-button-default Select JSON File
+          p Next, select that file here:
+          .uk-margin
+            label(for="blockfile").uk-form-label JSON Block List
+            .uk-form-custom.uk-display-block
+              input(id="blockfile", name="blockfile", type="file")
+              button(type="button").uk-button.uk-button-default Select JSON File
+        .uk-margin
+          p And submit it for processing:
+          button(type="submit").uk-button.uk-button-primary Upload Block List
+  
+  section.uk-section.uk-section-default
+    .uk-container.uk-container-expand
+      .uk-margin-large
+        div(uk-grid)
+          each profile in profiles
+            div(class="uk-width-1-1 uk-width-1-2@m uk-width-1-3@l uk-width-1-4@xl")
+              +renderGabUser(profile)
 
-        button(type="submit").uk-button.uk-button-primary Upload Block List
+      ul.uk-pagination.uk-flex-center
+        li(class={ 'uk-disabled': pagination.p <= 1 })
+          a(href=`/?p=${pagination.p - 1}`)
+            span(uk-pagination-previous)
+        
+        - var maxPages = (pagination.totalItems / pagination.cpp);
+        - var p = Math.max(pagination.p - 3, 1);
+        - var end = Math.min(p + 8, maxPages);
+
+        while p < end
+          li(class={ 'uk-active': p === pagination.p })
+            a(href=`/?p=${p}`)= p
+          - p += 1;
+
+        li(class={ 'uk-disabled': (pagination.p >= (maxPages - 1)) })
+          a(href=`/?p=${pagination.p + 1}`)
+            span(uk-pagination-next)

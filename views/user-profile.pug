@@ -3,4 +3,24 @@ block content
 
   section.uk-section.uk-section-default
     .uk-container
-      h1 User Profile
+      .uk-card.uk-card-default.uk-card-small
+        if !profile.header_static.match(/missing\.png/)
+          .uk-card-media-top
+            .header-crop
+              img(src= profile.header_static || profile.header)
+        .uk-card-header
+          div(uk-grid).uk-grid-collapse
+            .uk-width-auto
+              a(href=`https://gab.com/${profile.username}`)
+                img(src= profile.avatar_static || profile.avatar, class={ 'gab-pro': profile.is_pro }).profile-picture.uk-margin-small-right
+            .uk-width-expand
+              if profile.display_name && profile.display_name.length
+                .uk-text-bold= profile.display_name
+              .uk-text-small
+                a(href=`https://gab.com/${profile.username}`) @#{profile.username}
+          div(uk-grid).uk-grid-small.uk-text-small.uk-flex-between
+            .uk-width-auto(title= `Statuses: ${numeral(profile.statuses_count).format('0,0')}`) statuses: #{printNumber(profile.statuses_count)}
+            .uk-width-auto(title= `Followers: ${numeral(profile.followers_count).format('0,0')}`) followers: #{printNumber(profile.followers_count)}
+            .uk-width-auto(title= `Following: ${numeral(profile.following_count).format('0,0')}`) following: #{printNumber(profile.following_count)}
+        .uk-card-body
+          .uk-text-break.uk-height-small.uk-overflow-auto!= profile.note

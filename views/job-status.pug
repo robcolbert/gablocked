@@ -1,0 +1,24 @@
+extends layouts/main
+block content
+
+  section.uk-section.uk-section-default
+    .uk-container
+      .uk-card.uk-card-default
+        .uk-card-header
+          h4.uk-card-title Job Status
+        .uk-card-body
+          p Your JSON file has been accepted. The user list is being resolved in the background now using a job queue.
+          div(uk-grid).uk-flex-between
+            .uk-width-auto waiting#[br]#{numeral(jobCounts.waiting).format('0,0')}
+            .uk-width-auto delayed#[br]#{numeral(jobCounts.delayed).format('0,0')}
+            .uk-width-auto paused#[br]#{numeral(jobCounts.paused).format('0,0')}
+            .uk-width-auto active#[br]#{numeral(jobCounts.active).format('0,0')}
+
+            .uk-width-auto completed#[br]#{numeral(jobCounts.completed).format('0,0')}
+            .uk-width-auto failed#[br]#{numeral(jobCounts.failed).format('0,0')}
+        .uk-card-footer
+          div(uk-grid).uk-flex-between
+            .uk-width-auto
+              a(href="/job-status").uk-button.uk-button-primary Refresh
+            .uk-width-auto
+              a(href="/").uk-button.uk-button-secondary Home
