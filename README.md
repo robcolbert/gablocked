@@ -64,9 +64,9 @@ npm install -g nodemon
 yarn dev
 ```
 
-This will start `gablocked.js` under Nodemon for iterative development. This may be the world's simplest Node.js app.
+This will start `gablocked.mjs` under Nodemon for iterative development. This may be the world's simplest Node.js app.
 
-- [gablocked.js](gablocked.js) is the web application.
+- [gablocked.mjs](gablocked.mjs) is the web application.
 - There is one model file [gab-user.js](models/gab-user.js).
 - The [views](views) directory is self-explanatory
 
